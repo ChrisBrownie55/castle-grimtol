@@ -147,6 +147,8 @@ namespace castle_grimtol.Models
 
     public void Setup()
     {
+      Console.Clear();
+
       Console.Write("What's your name adventurer? ");
       CurrentPlayer = new Player(Console.ReadLine());
 
