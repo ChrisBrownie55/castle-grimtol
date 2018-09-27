@@ -56,7 +56,7 @@ namespace castle_grimtol.Models
       } while (command != "quit" && !GameWon && !GameLost);
 
       if (GameWon || GameLost) {
-        Console.Beep(300, 500);
+        Console.Beep(GameLost ? 500 : 700, GameLost ? 1000 : 500);
         string input = "";
 
         do {
