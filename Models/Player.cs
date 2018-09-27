@@ -6,7 +6,7 @@ namespace castle_grimtol.Models
   public class Player : IPlayer
   {
     public string PlayerName { get; set; }
-    public List<IItem> Inventory { get; set; }
+    public List<IItem> Inventory { get; set; } = new List<IItem>();
 
     public int IndexOfItemByName(string name) {
       for (int i = 0; i < Inventory.Count; ++i) {
