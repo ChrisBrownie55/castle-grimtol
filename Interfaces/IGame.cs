@@ -7,7 +7,6 @@ namespace castle_grimtol.Interfaces
   {
     bool GameWon { get; set; }
     bool GameLost { get; set; }
-    Room StartRoom { get; set; }
     Room CurrentRoom { get; set; }
     Player CurrentPlayer { get; set; }
 

@@ -9,7 +9,6 @@ namespace castle_grimtol.Models
   {
     public bool GameWon { get; set; } = false;
     public bool GameLost { get; set; } = false;
-    public Room StartRoom { get; set; }
     public Room CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
     public Room WinRoom = new Room("Win Room", "");
@@ -30,8 +29,7 @@ namespace castle_grimtol.Models
 
         switch (command) {
           case "go":
-            string direction = optionsString;
-            Go(direction);
+            Go(optionsString);
             break;
           case "help":
             Help();
@@ -58,6 +56,7 @@ namespace castle_grimtol.Models
       } while (command != "quit" && !GameWon && !GameLost);
 
       if (GameWon || GameLost) {
+        Console.Beep(300, 500);
         string input = "";
 
         do {
@@ -171,9 +170,9 @@ namespace castle_grimtol.Models
       Console.Write("What's your name adventurer? ");
       CurrentPlayer = new Player(Console.ReadLine());
 
-      StartRoom = new Room(
+      Room startRoom = new Room(
         "Cell",
-        $"This is the cell you woke up in {CurrentPlayer.PlayerName}, you don't know how you got here, but you know you need to get out. You notice a sharp knife-like shaped object in the corner. You also see what looks like a door on the East wall."
+        $"This is the cell you woke up in, {CurrentPlayer.PlayerName}. You don't know how you got here, but you know you need to get out. You notice a sharp knife-like shaped object in the corner. You also see what looks like a door on the East wall."
       );
 
       Room keyRoom = new Room(
@@ -221,20 +220,20 @@ namespace castle_grimtol.Models
         "An empty bottle, it doesn't seem like it has any use, it looks cool tho."
       );
 
-      StartRoom.Items.Add(sword);
+      startRoom.Items.Add(sword);
       keyRoom.Items.Add(key);
       treasureRoom.Items.Add(treasureChest);
       warpRoom.Items.Add(bottle);
 
-      StartRoom.AddRoom("east", keyRoom);
+      startRoom.AddRoom("east", keyRoom);
       keyRoom.AddRoom("south", pitRoom);
       keyRoom.AddRoom("east", warpRoom);
       warpRoom.AddRoom("north", treasureRoom);
-      warpRoom.AddRoom("east", StartRoom, false);
+      warpRoom.AddRoom("east", startRoom, false);
 
       // going west wins the game
-      treasureRoom.AddRoom("west", WinRoom);
-      CurrentRoom = StartRoom;
+      treasureRoom.AddRoom("west", WinRoom, false);
+      CurrentRoom = startRoom;
 
       Look();
     }
