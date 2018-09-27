@@ -223,6 +223,12 @@ namespace castle_grimtol.Models
         return;
       }
 
+      if (CurrentPlayer.Inventory[itemIndex].KillsPlayer) {
+        GameLost = true;
+        Console.WriteLine($"You died when you used your {itemName}. R.I.P.");
+        return;
+      }
+
       switch (itemName) {
         case "key":
           if (!CurrentRoom.Unlock()) {
