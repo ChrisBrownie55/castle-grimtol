@@ -8,7 +8,7 @@ namespace castle_grimtol.Models
     public string Name { get; set; }
     public string Description { get; set; }
     public List<IItem> Items { get; set; }
-    public Dictionary<string, IRoom> Exits { get; set; }
+    public Dictionary<string, IRoom> Exits { get; set; } = new Dictionary<string, IRoom>();
 
     public void AddRoom(string direction, IRoom room, bool connectOtherSide = true) {
       direction = direction.ToString();

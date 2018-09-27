@@ -172,6 +172,7 @@ namespace castle_grimtol.Models
     public void StartGame()
     {
       Setup();
+      GetUserInput();
     }
 
     public void TakeItem(string itemName)
