@@ -190,7 +190,7 @@ namespace castle_grimtol.Models
 
       Room warpRoom = new Room(
         "Canvas Area",
-        "You enter the room, it seems very bright, very empty.. Suddenly the door closes behind you. There are two other doors, North and East. You can't see what's on the other side of the North door, it's completely dark in there. What will you do?"
+        "You enter the room, it seems very bright, very empty.. Suddenly the door closes behind you. There are two other doors, North and East. You can't see what's on the other side of the North door, it's completely dark in there. What will you do? Oh, there's also some kind of bottle in the corner."
       );
       // west is already locked bc east is locked on keyRoom (they are connected).
 
@@ -216,9 +216,15 @@ namespace castle_grimtol.Models
       );
       treasureChest.KillsPlayer = true;
 
+      Item bottle = new Item(
+        "bottle",
+        "An empty bottle, it doesn't seem like it has any use, it looks cool tho."
+      );
+
       StartRoom.Items.Add(sword);
       keyRoom.Items.Add(key);
       treasureRoom.Items.Add(treasureChest);
+      warpRoom.Items.Add(bottle);
 
       StartRoom.AddRoom("east", keyRoom);
       keyRoom.AddRoom("south", pitRoom);
