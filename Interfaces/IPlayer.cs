@@ -7,7 +7,5 @@ namespace castle_grimtol.Interfaces
   {
     string PlayerName { get; set; }
     List<IItem> Inventory { get; set; }
-    int IndexOfItemByName(string name);
-    void RemoveItem(int index);
   }
 }

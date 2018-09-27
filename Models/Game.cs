@@ -154,6 +154,7 @@ namespace castle_grimtol.Models
     public void Reset()
     {
       GameWon = false;
+      GameLost = false;
     }
 
     public void Setup()
@@ -191,6 +192,27 @@ namespace castle_grimtol.Models
         "You walk into the room. Light fades in. There's a box of treasure. It's so beatiful. Gold everywhere. To the East side you also notice a door with what seems like natural light escaping from it. Could it be the exit?"
       );
 
+      Item sword = new Item(
+        "sword",
+        "An odd looking sword, it appears to be very dull. As you inspect it more closely you feel your hands begin to burn, you begin to hear voices in your head. The pain spreads from your hands to the rest of your body. The pain becomes too much..."
+      );
+      sword.KillsPlayer = true;
+
+      Item key = new Item(
+        "key",
+        "A dull looking key covered in dirt. Hopefully it can still open things."
+      );
+
+      Item treasureChest = new Item(
+        "chest",
+        "As you begin to open the chest it suddenly attacks you. A rookie mistake..."
+      );
+      treasureChest.KillsPlayer = true;
+
+      StartRoom.Items.Add(sword);
+      keyRoom.Items.Add(key);
+      treasureRoom.Items.Add(treasureChest);
+
       StartRoom.AddRoom("east", keyRoom);
       keyRoom.AddRoom("south", pitRoom);
       keyRoom.AddRoom("east", warpRoom);
@@ -212,7 +234,18 @@ namespace castle_grimtol.Models
 
     public void TakeItem(string itemName)
     {
-      
+      int itemIndex = CurrentRoom.IndexOfItemByName(itemName);
+      if (itemIndex == -1) {
+        Console.WriteLine($"You must be hallucinating. That item isn't in this room");
+      }
+
+      if (CurrentRoom.Items[itemIndex].KillsPlayer) {
+        GameLost = true;
+        Console.WriteLine($"You died when you picked up the {itemName}. R.I.P.");
+        return;
+      }
+
+      CurrentPlayer.Inventory.Add(CurrentRoom.Items[itemIndex]);
     }
 
     public void UseItem(string itemName)
@@ -223,11 +256,6 @@ namespace castle_grimtol.Models
         return;
       }
 
-      if (CurrentPlayer.Inventory[itemIndex].KillsPlayer) {
-        GameLost = true;
-        Console.WriteLine($"You died when you used your {itemName}. R.I.P.");
-        return;
-      }
 
       switch (itemName) {
         case "key":

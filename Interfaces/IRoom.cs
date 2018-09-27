@@ -7,7 +7,7 @@ namespace castle_grimtol.Interfaces
     {
         string Name { get; set; }
         string Description { get; set; }
-        List<IItem> Items { get; set; }
+        List<Item> Items { get; set; }
         // you don't need dictionary here, just AddRoom, RemoveRoom (sorta), HasExit, and GetExit
         // Dictionary<string, Room> Exits { get; set; }
         void AddRoom(string direction, Room room, bool connectOtherSide = true);
