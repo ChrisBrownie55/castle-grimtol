@@ -12,6 +12,7 @@ namespace castle_grimtol.Models
     public Room StartRoom { get; set; }
     public Room CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
+    public Room WinRoom = new Room("Win Room", "");
 
     public void GetUserInput()
     {
@@ -69,6 +70,7 @@ namespace castle_grimtol.Models
           StartGame();
           return;
         } else {
+          Console.Clear();
           Console.WriteLine("Goodbye.");
           return;
         }
@@ -95,7 +97,7 @@ namespace castle_grimtol.Models
       }
 
       CurrentRoom = CurrentRoom.GetExit(direction);
-      if (CurrentRoom == null) {
+      if (CurrentRoom == WinRoom) {
         GameWon = true;
         Console.WriteLine("Congrats you won the game! Now go write some code."); // 🎉
         return;
@@ -152,6 +154,7 @@ namespace castle_grimtol.Models
 
     public void Quit()
     {
+      Console.Clear();
       Console.WriteLine("Quitter.");
     }
 
@@ -223,8 +226,8 @@ namespace castle_grimtol.Models
       warpRoom.AddRoom("north", treasureRoom);
       warpRoom.AddRoom("east", StartRoom, false);
 
-      // null represents the room in which you win the game
-      treasureRoom.AddRoom("west", null, false);
+      // going west wins the game
+      treasureRoom.AddRoom("west", WinRoom);
       CurrentRoom = StartRoom;
 
       Look();
