@@ -169,6 +169,8 @@ namespace castle_grimtol.Models
       // null represents the room in which you win the game
       treasureRoom.AddRoom("west", null, false);
       CurrentRoom = StartRoom;
+
+      Look();
     }
 
     public void StartGame()
