@@ -8,9 +8,9 @@ namespace castle_grimtol.Models
     public string Name { get; set; }
     public string Description { get; set; }
     public List<IItem> Items { get; set; }
-    public Dictionary<string, Room> Exits { get; set; } = new Dictionary<string, Room>();
+    private Dictionary<string, Room> Exits = new Dictionary<string, Room>();
 
-    public void AddRoom(string direction, IRoom room, bool connectOtherSide = true) {
+    public void AddRoom(string direction, Room room, bool connectOtherSide = true) {
       direction = direction.ToString();
       if (Exits.ContainsKey(direction)) {
         return;
@@ -27,7 +27,15 @@ namespace castle_grimtol.Models
       }
     }
 
-    public string Locked { get; set; }
+    private string locked;
+    public string Locked {
+      get => locked;
+      set {
+        if (value != null && Exits.ContainsKey(value)) {
+          locked = value;
+        }
+      }
+    }
 
     // Returns true if it was unlocked; false if already unlocked.
     public bool Unlock() {
@@ -38,15 +46,15 @@ namespace castle_grimtol.Models
       return true;
     }
 
-    public bool KillsPlayer { get; set; }
+    public void RemoveRoom(string direction, bool disconnectOtherSide = true) {
+      throw new System.NotImplementedException();
+    }
 
-    public Room(string name, string description, string locked = null) {
+    public bool KillsPlayer { get; set; } = false;
+
+    public Room(string name, string description) {
       Name = name;
       Description = description;
-      List<string> directions = new List<string>(){ "north", "east", "south", "west" };
-      if (locked != null && directions.Contains(locked)) {
-        Locked = locked;
-      }
     }
   }
 }

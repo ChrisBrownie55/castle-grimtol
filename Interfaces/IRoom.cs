@@ -8,8 +8,10 @@ namespace castle_grimtol.Interfaces
         string Name { get; set; }
         string Description { get; set; }
         List<IItem> Items { get; set; }
-        Dictionary<string, Room> Exits { get; set; }
-        void AddRoom(string direction, IRoom room, bool connectOtherSide = true);
+        // you don't need dictionary here, just AddRoom and RemoveRoom
+        // Dictionary<string, Room> Exits { get; set; }
+        void AddRoom(string direction, Room room, bool connectOtherSide = true);
+        void RemoveRoom(string direction, bool disconnectOtherSide = true);
         string Locked { get; set; }
         bool Unlock();
     }
