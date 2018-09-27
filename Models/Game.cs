@@ -113,6 +113,10 @@ namespace castle_grimtol.Models
 
     public void Inventory()
     {
+      if (CurrentPlayer.Inventory.Count == 0) {
+        Console.WriteLine("Your pockets are empty.");
+        return;
+      }
       CurrentPlayer.Inventory.ForEach(item => Console.WriteLine($"{item.Name} - {item.Description}"));
     }
 
