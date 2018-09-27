@@ -146,7 +146,7 @@ namespace castle_grimtol.Models
       Console.Write("What's your name adventurer? ");
       CurrentPlayer = new Player(Console.ReadLine());
 
-      StartRoom = new Room("Cell", "This is the cell you woke up in, you don't know how you got here, but you know you need to get out.");
+      StartRoom = new Room("Cell", $"This is the cell you woke up in {CurrentPlayer.PlayerName}, you don't know how you got here, but you know you need to get out.");
       Room keyRoom = new Room(
         "Barred Room",
         "The room is dark, windows barred, but you notice a sparkling in the corner. You can't quite see it. You also notice two doors, one east, one south..",
