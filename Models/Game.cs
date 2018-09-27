@@ -54,13 +54,16 @@ namespace castle_grimtol.Models
             Console.WriteLine("Stop speaking gibberish, that's not a command.");
             break;
         }
-      } while (command != "quit" || GameWon);
-      if (GameWon) {
+      } while (command != "quit" && !GameWon && !GameLost);
+
+      if (GameWon || GameLost) {
         string input = "";
+
         do {
-          Console.Write("Would you like to continue, yes or no? ");
+          Console.Write("Would you like to play again, yes or no? ");
           input = Console.ReadLine().ToLower();
         } while (input != "yes" && input != "no");
+
         if (input == "yes") {
           Reset();
           StartGame();
@@ -76,11 +79,11 @@ namespace castle_grimtol.Models
       List<string> directions = new List<string>(){"north", "east", "south", "west"};
       if (!directions.Contains(direction)) {
         // sorry, there aren't any waffle emojis
-        Console.WriteLine("Never eat soggy 🥞 waffles.");
+        Console.WriteLine("Never eat soggy waffles 🥞.");
         return;
       }
 
-      if (!CurrentRoom.Exits.ContainsKey(direction)) {
+      if (!CurrentRoom.HasExit(direction)) {
         Console.WriteLine("That's a wall 🤦");
         return;
       }
@@ -90,13 +93,19 @@ namespace castle_grimtol.Models
         return;
       }
 
-      CurrentRoom = CurrentRoom.Exits[direction];
+      CurrentRoom = CurrentRoom.GetExit(direction);
       if (CurrentRoom == null) {
         GameWon = true;
         Console.WriteLine("Congrats you won the game 🎉! Now go write some code.");
         return;
       }
       Look();
+      if (CurrentRoom.KillsPlayer) {
+        GameLost = true;
+        Thread.Sleep(500);
+        Console.WriteLine("Wow, you died already... 🤯 mind blown.");
+        return;
+      }
     }
 
     public void Help()

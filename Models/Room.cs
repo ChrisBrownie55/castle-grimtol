@@ -26,6 +26,15 @@ namespace castle_grimtol.Models
         room.Exits.Add(oppositeDirection, this);
       }
     }
+    public void RemoveRoom(string direction, bool disconnectOtherSide = true) {
+      throw new System.NotImplementedException();
+    }
+    public bool HasExit(string direction) {
+      return Exits.ContainsKey(direction);
+    }
+    public Room GetExit(string direction) {
+      return Exits[direction];
+    }
 
     private string locked;
     public string Locked {
@@ -44,10 +53,6 @@ namespace castle_grimtol.Models
       }
       Locked = null;
       return true;
-    }
-
-    public void RemoveRoom(string direction, bool disconnectOtherSide = true) {
-      throw new System.NotImplementedException();
     }
 
     public bool KillsPlayer { get; set; } = false;
