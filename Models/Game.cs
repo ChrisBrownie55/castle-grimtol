@@ -122,6 +122,7 @@ namespace castle_grimtol.Models
 
     public void Look()
     {
+      Console.Write('\n');
       ConsoleColor background = Console.BackgroundColor;
       ConsoleColor foreground = Console.ForegroundColor;
 
