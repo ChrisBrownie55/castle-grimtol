@@ -3,12 +3,12 @@ using castle_grimtol.Interfaces;
 
 namespace castle_grimtol.Models
 {
-  public class Room : IRoom
+  public class Room : IRoom, ICanKillPlayer
   {
     public string Name { get; set; }
     public string Description { get; set; }
     public List<IItem> Items { get; set; }
-    public Dictionary<string, IRoom> Exits { get; set; } = new Dictionary<string, IRoom>();
+    public Dictionary<string, Room> Exits { get; set; } = new Dictionary<string, Room>();
 
     public void AddRoom(string direction, IRoom room, bool connectOtherSide = true) {
       direction = direction.ToString();
@@ -38,6 +38,7 @@ namespace castle_grimtol.Models
       return true;
     }
 
+    public bool KillsPlayer { get; set; }
 
     public Room(string name, string description, string locked = null) {
       Name = name;

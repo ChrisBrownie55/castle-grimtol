@@ -6,9 +6,10 @@ namespace castle_grimtol.Interfaces
   public interface IGame
   {
     bool GameWon { get; set; }
-    IRoom StartRoom { get; set; }
-    IRoom CurrentRoom { get; set; }
-    IPlayer CurrentPlayer { get; set; }
+    bool GameLost { get; set; }
+    Room StartRoom { get; set; }
+    Room CurrentRoom { get; set; }
+    Player CurrentPlayer { get; set; }
 
     //Initializes the game, creates rooms, their exits, and add items to rooms
     void Setup();

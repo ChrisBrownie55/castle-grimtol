@@ -6,6 +6,5 @@ namespace castle_grimtol.Interfaces
   {
     string Name { get; set; }
     string Description { get; set; }
-    bool KillsPlayer { get; set; }
   }
 }

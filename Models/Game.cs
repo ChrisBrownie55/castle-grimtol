@@ -8,9 +8,10 @@ namespace castle_grimtol.Models
   public class Game : IGame
   {
     public bool GameWon { get; set; } = false;
-    public IRoom StartRoom { get; set; }
-    public IRoom CurrentRoom { get; set; }
-    public IPlayer CurrentPlayer { get; set; }
+    public bool GameLost { get; set; } = false;
+    public Room StartRoom { get; set; }
+    public Room CurrentRoom { get; set; }
+    public Player CurrentPlayer { get; set; }
 
     public void GetUserInput()
     {
@@ -153,19 +154,19 @@ namespace castle_grimtol.Models
       Console.Write("What's your name adventurer? ");
       CurrentPlayer = new Player(Console.ReadLine());
 
-      StartRoom = new Room("Cell", $"This is the cell you woke up in {CurrentPlayer.PlayerName}, you don't know how you got here, but you know you need to get out.");
+      StartRoom = new Room("Cell", $"This is the cell you woke up in {CurrentPlayer.PlayerName}, you don't know how you got here, but you know you need to get out. You notice a sharp knife-like shaped object in the corner. You also see what looks like a door on the East wall.");
       Room keyRoom = new Room(
         "Barred Room",
-        "The room is dark, windows barred, but you notice a sparkling in the corner. You can't quite see it. You also notice two doors, one east, one south..",
+        "The room is dark, windows barred, but you notice a sparkling in the corner. You can't quite see it. You also notice two doors, one East, one South..",
         "east"
       );
       Room pitRoom = new Room("T H E P I T", "It's even darker in this room. You hastily walk into the room looking for a source of light...\nYou fell into a pit.");
       Room warpRoom = new Room(
         "Canvas Area",
-        "You enter the room, it seems very bright, very empty.. Suddenly the door closes behind you. There are two other doors, north and east. What will you do?",
+        "You enter the room, it seems very bright, very empty.. Suddenly the door closes behind you. There are two other doors, North and East. You can't see what's on the other side of the North door, it's completely dark in there. What will you do?",
         "west"
       );
-      Room treasureRoom = new Room("Treasure?", "You walk into the room, there's a box of treasure. It's so beatiful. Gold. Everywhere. To the East side you also notice a door with what seems like natural light escaping from it.");
+      Room treasureRoom = new Room("Treasure?", "You walk into the room. Light fades in. There's a box of treasure. It's so beatiful. Gold everywhere. To the East side you also notice a door with what seems like natural light escaping from it. Could it be the exit?");
 
       StartRoom.AddRoom("east", keyRoom);
       keyRoom.AddRoom("south", pitRoom);
