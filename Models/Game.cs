@@ -46,6 +46,9 @@ namespace castle_grimtol.Models
           case "use":
             UseItem(optionsString);
             break;
+          case "quit":
+            Quit();
+            break;
           default:
             Console.WriteLine("Stop speaking gibberish, that's not a command.");
             break;
@@ -65,7 +68,6 @@ namespace castle_grimtol.Models
           Quit();
         }
       }
-      Quit();
     }
 
     public void Go(string direction)
