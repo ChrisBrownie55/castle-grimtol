@@ -243,6 +243,8 @@ namespace castle_grimtol.Models
           Console.WriteLine($"You used your {itemName}, it didn't do anything.");
           break;
       }
+
+      CurrentPlayer.RemoveItem(itemIndex);
     }
   }
 }
