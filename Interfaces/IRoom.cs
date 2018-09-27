@@ -15,6 +15,5 @@ namespace castle_grimtol.Interfaces
         bool HasExit(string direction);
         Room GetExit(string direction);
         string Locked { get; set; }
-        bool Unlock();
     }
 }

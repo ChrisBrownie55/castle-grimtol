@@ -107,6 +107,9 @@ namespace castle_grimtol.Models
         Console.WriteLine("Wow, you died already... mind blown."); // 🤯
         return;
       }
+      if (CurrentRoom.Name == "Canvas Area") {
+        CurrentRoom.Lock("west");
+      }
     }
 
     public void Help()
@@ -139,7 +142,7 @@ namespace castle_grimtol.Models
 
       Console.BackgroundColor = ConsoleColor.White;
       Console.ForegroundColor = ConsoleColor.Black;
-      Console.WriteLine(CurrentRoom.Name);
+      Console.WriteLine($" {CurrentRoom.Name} ");
 
       Console.BackgroundColor = background;
       Console.ForegroundColor = foreground;
@@ -186,7 +189,7 @@ namespace castle_grimtol.Models
         "Canvas Area",
         "You enter the room, it seems very bright, very empty.. Suddenly the door closes behind you. There are two other doors, North and East. You can't see what's on the other side of the North door, it's completely dark in there. What will you do?"
       );
-      warpRoom.Locked = "west";
+      // west is already locked bc east is locked on keyRoom (they are connected).
 
       Room treasureRoom = new Room(
         "Treasure?",
@@ -246,7 +249,7 @@ namespace castle_grimtol.Models
       ConsoleColor foreground = Console.ForegroundColor;
       Console.BackgroundColor = ConsoleColor.Green;
       Console.ForegroundColor = ConsoleColor.White;
-      Console.WriteLine(CurrentRoom.Items[itemIndex].Name);
+      Console.WriteLine($" {CurrentRoom.Items[itemIndex].Name} ");
       Console.BackgroundColor = background;
       Console.ForegroundColor = foreground;
       Console.WriteLine(CurrentRoom.Items[itemIndex].Description);

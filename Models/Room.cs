@@ -38,12 +38,31 @@ namespace castle_grimtol.Models
 
     public string Locked { get; set; }
 
+    public void Lock(string direction) {
+      if (Locked != null) {
+        return;
+      }
+      Locked = direction;
+
+      string oppositeDirection =
+        direction == "north" ? "south" :
+        direction == "south" ? "north" :
+        direction == "east" ? "west" :
+        direction == "west" ? "east" :
+        "";
+
+      Exits[direction].Lock(oppositeDirection);
+    }
+
     // Returns true if it was unlocked; false if already unlocked.
     public bool Unlock() {
       if (Locked == null) {
         return false;
       }
+
+      Exits[Locked].Unlock();
       Locked = null;
+
       return true;
     }
     public bool KillsPlayer { get; set; } = false;
