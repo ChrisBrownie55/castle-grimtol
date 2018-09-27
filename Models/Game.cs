@@ -80,31 +80,31 @@ namespace castle_grimtol.Models
       List<string> directions = new List<string>(){"north", "east", "south", "west"};
       if (!directions.Contains(direction)) {
         // sorry, there aren't any waffle emojis
-        Console.WriteLine("Never eat soggy waffles 🥞.");
+        Console.WriteLine("Never eat soggy waffles."); // 🥞
         return;
       }
 
       if (!CurrentRoom.HasExit(direction)) {
-        Console.WriteLine("That's a wall 🤦");
+        Console.WriteLine("That's a wall"); // 🤦
         return;
       }
 
       if (CurrentRoom.Locked == direction) {
-        Console.WriteLine("It's locked, 🤔 maybe there's a key nearby.");
+        Console.WriteLine("It's locked, maybe there's a key nearby."); // 🤔
         return;
       }
 
       CurrentRoom = CurrentRoom.GetExit(direction);
       if (CurrentRoom == null) {
         GameWon = true;
-        Console.WriteLine("Congrats you won the game 🎉! Now go write some code.");
+        Console.WriteLine("Congrats you won the game! Now go write some code."); // 🎉
         return;
       }
       Look();
       if (CurrentRoom.KillsPlayer) {
         GameLost = true;
         Thread.Sleep(500);
-        Console.WriteLine("Wow, you died already... 🤯 mind blown.");
+        Console.WriteLine("Wow, you died already... mind blown."); // 🤯
         return;
       }
     }
@@ -240,6 +240,16 @@ namespace castle_grimtol.Models
         Console.WriteLine($"You must be hallucinating. That item isn't in this room");
         return;
       }
+
+      // change colors + print name and description of item
+      ConsoleColor background = Console.BackgroundColor;
+      ConsoleColor foreground = Console.ForegroundColor;
+      Console.BackgroundColor = ConsoleColor.Green;
+      Console.ForegroundColor = ConsoleColor.White;
+      Console.WriteLine(CurrentRoom.Items[itemIndex].Name);
+      Console.BackgroundColor = background;
+      Console.ForegroundColor = foreground;
+      Console.WriteLine(CurrentRoom.Items[itemIndex].Description);
 
       if (CurrentRoom.Items[itemIndex].KillsPlayer) {
         GameLost = true;
