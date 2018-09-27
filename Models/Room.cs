@@ -7,7 +7,7 @@ namespace castle_grimtol.Models
   {
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<Item> Items { get; set; }
+    public List<Item> Items { get; set; } = new List<Item>();
     private Dictionary<string, Room> Exits = new Dictionary<string, Room>();
 
     public void AddRoom(string direction, Room room, bool connectOtherSide = true) {

@@ -69,7 +69,8 @@ namespace castle_grimtol.Models
           StartGame();
           return;
         } else {
-          Quit();
+          Console.WriteLine("Goodbye.");
+          return;
         }
       }
     }
@@ -189,7 +190,7 @@ namespace castle_grimtol.Models
 
       Room treasureRoom = new Room(
         "Treasure?",
-        "You walk into the room. Light fades in. There's a box of treasure. It's so beatiful. Gold everywhere. To the East side you also notice a door with what seems like natural light escaping from it. Could it be the exit?"
+        "You walk into the room. Light fades in. There's a chest. It's so beatiful. Gold everywhere. To the East side you also notice a door with what seems like natural light escaping from it. Could it be the exit?"
       );
 
       Item sword = new Item(
@@ -237,6 +238,7 @@ namespace castle_grimtol.Models
       int itemIndex = CurrentRoom.IndexOfItemByName(itemName);
       if (itemIndex == -1) {
         Console.WriteLine($"You must be hallucinating. That item isn't in this room");
+        return;
       }
 
       if (CurrentRoom.Items[itemIndex].KillsPlayer) {
@@ -246,6 +248,7 @@ namespace castle_grimtol.Models
       }
 
       CurrentPlayer.Inventory.Add(CurrentRoom.Items[itemIndex]);
+      CurrentRoom.RemoveItem(itemIndex);
     }
 
     public void UseItem(string itemName)
