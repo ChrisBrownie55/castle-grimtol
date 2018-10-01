@@ -203,6 +203,11 @@ namespace castle_grimtol.Models
         "An odd looking sword, it appears to be very dull. As you inspect it more closely you feel your hands begin to burn, you begin to hear voices in your head. The pain spreads from your hands to the rest of your body. The pain becomes too much..."
       );
       sword.KillsPlayer = true;
+      Item sharpKnifeLikeShapedObject = new Item(
+        "sharp knife-like shaped object",
+        "An odd looking sharp knife-like shaped object, it appears to be very dull. As you inspect it more closely you feel your hands begin to burn, you begin to hear voices in your head. The pain spreads from your hands to the rest of your body. The pain becomes too much..."
+      );
+      sharpKnifeLikeShapedObject.KillsPlayer = true;
 
       Item key = new Item(
         "key",
@@ -221,6 +226,7 @@ namespace castle_grimtol.Models
       );
 
       startRoom.Items.Add(sword);
+      startRoom.Items.Add(sharpKnifeLikeShapedObject);
       keyRoom.Items.Add(key);
       treasureRoom.Items.Add(treasureChest);
       warpRoom.Items.Add(bottle);
@@ -284,7 +290,7 @@ namespace castle_grimtol.Models
       switch (itemName) {
         case "key":
           if (!CurrentRoom.Unlock()) {
-            Console.WriteLine("What do you call someone who tries to unlock a door that doesn't have a lock?");
+            Console.WriteLine("What do you call someone who tries to unlock a door that doesn't have a lock? Also, you're out a key.");
             Thread.Sleep(500);
             Console.WriteLine("Stupid, that's what you call them.");
           } else {
