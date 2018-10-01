@@ -49,6 +49,12 @@ namespace castle_grimtol.Models
           case "quit":
             Quit();
             break;
+          case "clear":
+            Console.Clear();
+            Look();
+            break;
+          case "":
+            break;
           default:
             Console.WriteLine("Stop speaking gibberish, that's not a command.");
             break;
@@ -124,6 +130,7 @@ namespace castle_grimtol.Models
       Console.WriteLine("  inventory");
       Console.WriteLine("  look");
       Console.WriteLine("  quit");
+      Console.WriteLine("  clear");
     }
 
     public void Inventory()
@@ -195,7 +202,7 @@ namespace castle_grimtol.Models
 
       Room treasureRoom = new Room(
         "Treasure?",
-        "You walk into the room. Light fades in. There's a chest. It's so beatiful. Gold everywhere. To the East side you also notice a door with what seems like natural light escaping from it. Could it be the exit?"
+        "You walk into the room. Light fades in. There's a chest. It's so beatiful. Gold everywhere. To the West side you also notice a door with what seems like natural light escaping from it. Could it be the exit?"
       );
 
       Item sword = new Item(
