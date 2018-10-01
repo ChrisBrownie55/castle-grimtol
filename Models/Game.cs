@@ -290,9 +290,10 @@ namespace castle_grimtol.Models
       switch (itemName) {
         case "key":
           if (!CurrentRoom.Unlock()) {
-            Console.WriteLine("What do you call someone who tries to unlock a door that doesn't have a lock? Also, you're out a key.");
+            Console.WriteLine("What do you call someone who tries to unlock a door that doesn't have a lock?");
             Thread.Sleep(500);
             Console.WriteLine("Stupid, that's what you call them.");
+            Console.WriteLine("Also, you're out a key.");
           } else {
             Console.WriteLine("You unlocked the door!");
           }
